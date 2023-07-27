@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.프로미스 객체</title>
+    <!--
+        날짜 : 2023/07/25
+        이름 : 김무현
+        내용 : javascript 프로미스 객체 방식 실습하기.
+    -->
+</head>
+<body>
+    <h3>2.프로미스 객체</h3>
+
+    <script>
+
+        let result = false;
+
+        const promise1 = new Promise((resolve, reject)=>{
+
+            if(result){
+                resolove('promise1 fulfilled...');
+            }else{
+                reject('proise1 reject...');
+            }
+
+        });
+
+        promise1
+            .then((msg)=>{ 
+                console.log(msg)
+            })
+            .catch((msg)=>{
+                console.log(msg);
+            })
+            .finally(()=>{
+                console.log('promise1 end...');
+            });
+            
+        //promise 를 이용한 비동기 방식 처리    
+        async function step1(){
+            return new Promise((resolove, reject)=>{
+                setTimeout(() => {
+                    resolove('step1...');
+                }, 1000);
+
+            });
+
+        }    
+
+        async function step2(msg){
+            console.log(msg);
+            return new Promise((resolove, reject)=>{
+                setTimeout(() => {
+                    resolove('step2...');
+                }, 3000);
+
+            });
+
+        }   
+
+        async function step3(msg){
+            console.log(msg);
+            return new Promise((resolove, reject)=>{
+                setTimeout(() => {
+                    resolove('step3...');
+                }, 2000);
+
+            });
+
+        }   
+
+        step1()
+            .then((msg)=>step2(msg))
+            .then((msg)=>step3(msg))
+            .then((msg)=>{
+                console.log(msg);
+            });
+
+        // async/await 구분을 활용한 비동기 처리
+        async function start(){
+            const result1 = await step1();
+            const result2 = await step2(result1);
+            const result3 = await step3(result2);
+            console.log(result3);
+        };    
+        setTimeout(()=>{
+            start();
+        }, 7000);
+        
+    </script>
+</body>
+</html>

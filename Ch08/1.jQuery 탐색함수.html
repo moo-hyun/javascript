@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.jQuery 탐색함수</title>
+    <!--
+        날짜 : 2023/07/27
+        이름 : 김무현
+        내용 : JQuery 탐색함수 실습하기
+
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+
+        
+        $(document).ready(()=>{
+
+           // jQuery() - 
+            const tags = jQuery('ul >li');
+            console.log('tags Length : ' + tags.length);
+
+           // eq() - 인덱스 번호로 선택
+            tags.eq(1).css('color', 'red');
+            tags.eq(2).css('color', 'green');
+
+           // fisrt(), last()-태그의 첫번째와 마지막
+
+           tags.first().css('color', 'grey');
+           tags.last().css('color', 'green');
+
+           // slice() - 다중선택 (시작점,마지막(마지막은 포함안함))
+           tags.slice(1,2).css('background', `yellow`);
+
+           // each() - 선택된 요소들을 하나씩 가져와서 css()기능 실행 (반복문)
+           tags.each(function(){
+
+                $(this).css('border', '1px solid black')
+           });
+           // children() - 자식속성 선택자
+           tags.eq(4).children().css('border', '1px solid red');
+
+           // next(), prev() - 태그의 next 다음 태그 prev 전 태그 선택
+           tags.first().next().next().next().css('color','orange');
+           tags.last().prev().prev().css('background','pink');
+
+           // find() - 한번에 원하는 태그를 선택할수있다.
+           tags.find('.seomyun').css('color','blue');
+
+           // parent() 태그의 부모태그를 선택할수있다.
+           tags.find('.seomyun').parent().prev().css('background','aqua');
+
+
+        });
+
+
+
+
+    </script>
+</head>
+<body>
+    <h3>1.jQuery 탐색함수</h3>
+
+    <ul>
+        <li id="seoul">서울</li>
+        <li>대전</li>
+        <li>대구</li>
+        <li>울산</li>
+        <li>
+            <span>부산</span>
+            <ol>
+                <li class="seomyun">서면</li>
+                <li>경성대</li>
+                <li>해운대</li>
+                <li>남포동</li>
+            </ol>
+        </li>
+            <li class="gwangju">광주</li>
+
+    </ul>
+    
+</body>
+</html>
